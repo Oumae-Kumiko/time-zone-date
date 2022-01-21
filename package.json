@@ -1,0 +1,11 @@
+{
+  "name": "@time-zone/date",
+  "version": "1.0.0",
+  "description": "2022-1-21发布; 获取各时区，指定判断某时区冬令时，操作时区时间等;",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "李嘉辉",
+  "license": "ISC"
+}

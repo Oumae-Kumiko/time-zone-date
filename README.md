@@ -29,43 +29,43 @@ isUS_Wt()
 * Judge whether the United States is now daylight saving time
 
 * Gets the time in the specified time zone  
-   1. Full time
-   2. Full time format adjustment
-   3. yyyymmdd　|　ddmmyyyy　|　mmddyyyy
-   4. Custom year and month and date formats: order, separator
-   5. hhmmss
-   6. year
-   7. month
-   8. date
-   9. hours（24-hour system）
-   10. minutes
-   11. seconds
-   12. week　　
+   * Full time
+   * Full time format adjustment
+   * yyyymmdd　|　ddmmyyyy　|　mmddyyyy
+   * Custom year and month and date formats: order, separator
+   * hhmmss
+   * year
+   * month
+   * date
+   * hours（24-hour system）
+   * minutes
+   * seconds
+   * week　　
 
 <br>
 
 > In addition, the above method can replace all the following contents
 * Get EST time zone  
-   1. Full time
-   2. yyyymmdd
-   3. hhmmss
-   4. yearv
-   5. month
-   6. date
-   7. hours（24-hour system. You can set 0 as the starting point of a new day or 24 as the starting point of a new day）
-   8. minutes
-   9. seconds
-   10. week  
+   * Full time
+   * yyyymmdd
+   * hhmmss
+   * yearv
+   * month
+   * date
+   * hours（24-hour system. You can set 0 as the starting point of a new day or 24 as the starting point of a new day）
+   * minutes
+   * seconds
+   * week  
 <br>
 
 * Get UTC time zone: time difference ± 0  
-   1. Full time
-   2. year
-   2. month
-   2. date
-   2. hours
-   2. minutes
-   2. seconds
+   * Full time
+   * year
+   * month
+   * date
+   * hours
+   * minutes
+   * seconds
 
 <br>  
 

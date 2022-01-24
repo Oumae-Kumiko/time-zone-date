@@ -1,21 +1,19 @@
 
 
-export let week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+export const week = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
 
-export let country = [
-  {
-    key: 'US',
-    timeZone: 'America/New_York',
-    locales: 'en-US'
-  },
-  {
-    key: 'CHN',
-    timeZone: 'Asia/Shanghai',
-    locales: 'zh-CN'
-  },
-  {
-    key: 'UTC',
-    timeZone: 'Asia/Shanghai',
-    locales: 'zh-CN'
-  },
-];
+export const DEFAULT_OPTIONS = {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
+  weekday: "short",
+  hour12:false, 
+  timeZoneName :"short",
+}
+
+export const getSymbol = (symbol)=>{
+  return symbol?symbol:'/'
+}

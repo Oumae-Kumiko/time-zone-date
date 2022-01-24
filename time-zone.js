@@ -1,58 +1,47 @@
 
-import {getUtcYear,getUtcMonth,getUtcDate,getUtcHours,getUtcMinutes,getUtcSeconds} from './operation'
-import { week,country } from './data'
+import {
+  UTC_getYear,UTC_getMonth,UTC_getDate,UTC_getHours,UTC_getMinutes,UTC_getSeconds,
+  EST_getYear,EST_getMonth,EST_getDate,EST_getHours,EST_getMinutes,EST_getSeconds
+} from './operation'
+import { DEFAULT_OPTIONS } from './data'
 let isObject = (type)=>{
   return Object.prototype.toString.call(type) === '[object Object]'
 }
 
-let DEFAULT_OPTIONS = {
-  year: "numeric",
-  month: "numeric",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  second: "numeric",
-  weekday: "short", // long 最长    narrow 最短
-  hour12:false, 
-  timeZone:"America/New_York",
-  timeZoneName :"short",  // short
-};
-export const getTimeZone = (locales,options)=> {
-  let data = Object.assign(DEFAULT_OPTIONS,options)
-  if (locales && options) {
-    return new Date().toLocaleString(locales,data)
-  }else{
-    let val = country.find(item=>{
-      return item == locales
-    })
-    if (val) {
-      data.timeZone = val.timeZone
-      data.locales = val.locales
-      return new Date().toLocaleString(locales,data)
-    }
-  }
-}
 export const getUTCDate = ()=> {
   return new Date().toUTCString()
 }
-export const getUSDate = (options)=> {
-  if (!isObject(options)&&options) {
-    console.error('getUSDate() 请传入正确 options 选项');
-  }
-  let data = Object.assign(DEFAULT_OPTIONS,options)
-  return new Date().toLocaleString("en-US",data)
+export const getESTDate = ()=> {
+  DEFAULT_OPTIONS.timeZone = "America/New_York"
+  return new Date().toLocaleString("en-US",DEFAULT_OPTIONS)
 }
-export const isUSDst = ()=> {
-  let UTCyear = getUtcYear()
-  let UTCmonth = getUtcMonth()
-  let UTCdate = getUtcDate()
-  let UTChours = getUtcHours()
-  let UTCminutes = getUtcMinutes()
-  let UTCseconds = getUtcSeconds()
-  let usDate = getUSDate()
-  let USmmddyyyy = usDate.split(' ')[1].split('/')  // 月 日 年
-  let UShms = usDate.split(' ')[2].split(':')  // 时 分 秒
-  let us = +new Date(Number(USmmddyyyy[2].replace(',','')),Number(USmmddyyyy[0])-1,Number(USmmddyyyy[1]),Number(UShms[0]),Number(UShms[1]),Number(UShms[2]))
+export const getWorldTimeZone = (locales,options)=> {
+  if (!isObject(options)&&options) {
+    console.error('getWorldTimeZone() 请传入正确 options 选项');
+  }
+  let data = {
+    ...DEFAULT_OPTIONS,
+    ...options
+  }
+  return new Date().toLocaleString(locales,data)
+}
+
+export const isUS_Dst = ()=> {
+  // 美国现在是否夏令时 GMT-4
+  let UTCyear = UTC_getYear()
+  let UTCmonth = UTC_getMonth()
+  let UTCdate = UTC_getDate()
+  let UTChours = UTC_getHours()
+  let UTCminutes = UTC_getMinutes()
+  let UTCseconds = UTC_getSeconds()
+  let us = +new Date(
+    EST_getYear(),
+    EST_getMonth(),
+    EST_getDate(),
+    EST_getHours(0),
+    EST_getMinutes(),
+    EST_getSeconds(),
+  )
   let utc = +new Date(UTCyear,UTCmonth,UTCdate,UTChours,UTCminutes,UTCseconds)
   let timeDiff = (us - utc)/1000/60/60
   if (timeDiff == -5) {
@@ -61,3 +50,8 @@ export const isUSDst = ()=> {
     return true
   }
 }
+export const isUS_Wt = ()=> {
+  // 美国现在是否冬令时 GMT-5
+  return !isUS_Dst()
+}
+

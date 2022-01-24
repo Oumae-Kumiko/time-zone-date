@@ -1,11 +1,27 @@
 {
   "name": "@time-zone/date",
-  "version": "1.0.0",
-  "description": "2022-1-21发布; 获取各时区，指定判断某时区冬令时，操作时区时间等;",
+  "version": "2.0.0",
+  "description": "让代码运行在不同国家环境下，都能准确获得指定国家的时间！Let the code run in different national environments, you can accurately obtain the time of the specified country!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "李嘉辉",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oumae-Kumiko/time-zone-date.git"
+  },
+  "keywords": [
+    "get time zone date",
+    "custom format",
+    "world time zone",
+    "date",
+    "locale",
+    "operation"
+  ],
+  "author": "李嘉辉,645770665@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oumae-Kumiko/time-zone-date/issues"
+  },
+  "homepage": "https://github.com/Oumae-Kumiko/time-zone-date#readme"
 }

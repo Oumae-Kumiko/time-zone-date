@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "es2015",
     "declaration": true,
     "strict": true,
     "moduleResolution": "node",
     "sourceMap": false,
+    "lib": ["ES2015","ESNext","DOM"],
   },
 }

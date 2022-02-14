@@ -13,7 +13,7 @@ export const UTC_getSeconds = ()=> new Date().getUTCSeconds()
 
 /** @以下是获取指定时区的指定数据 */
 // 不传则默认代码运行环境时的当前时区
-export const get_mmddyyyy = (region,symbol?:string)=> {
+export const get_mmddyyyy = (region:string,symbol?:string)=> {
   let sym = getSymbol(symbol)
   let date = getWorldTimeZone('en-GB',{timeZone:region})
   let dmy = date.split(' ')[1].replace(',','').split('/')
@@ -22,7 +22,7 @@ export const get_mmddyyyy = (region,symbol?:string)=> {
   let d = dmy[0]
   return `${m+sym}${d+sym}${y}`  // 月 日 年
 }
-export const get_ddmmyyyy = (region,symbol)=> {
+export const get_ddmmyyyy = (region:string,symbol?:string)=> {
   let sym = getSymbol(symbol)
   let date = getWorldTimeZone('en-GB',{timeZone:region})
   let dmy = date.split(' ')[1].replace(',','').split('/')
@@ -31,7 +31,7 @@ export const get_ddmmyyyy = (region,symbol)=> {
   let d = dmy[0]
   return `${d+sym}${m+sym}${y}`  // 日 月 年
 }
-export const get_yyyymmdd = (region,symbol)=> {
+export const get_yyyymmdd = (region:string,symbol?:string)=> {
   let sym = getSymbol(symbol)
   let date = getWorldTimeZone('en-GB',{timeZone:region})
   let dmy = date.split(' ')[1].replace(',','').split('/')
@@ -40,7 +40,7 @@ export const get_yyyymmdd = (region,symbol)=> {
   let d = dmy[0]
   return `${y+sym}${m+sym}${d}`  // 年 月 日
 }
-export const custom_yyyymmdd_sort = (region,sort,symbol)=> {
+export const custom_yyyymmdd_sort = (region:string,ymdsort?:string,symbol?:string)=> {
   let sym = getSymbol(symbol)
   let date = getWorldTimeZone('en-GB',{timeZone:region})
   let dmy = date.split(' ')[1].replace(',','').split('/')
@@ -48,8 +48,8 @@ export const custom_yyyymmdd_sort = (region,sort,symbol)=> {
   let m = dmy[1]
   let d = dmy[0]
   let returnData = ''
-  if (sort) {
-    sort = sort.split('')
+  if (ymdsort) {
+    let sort:string[] = ymdsort.split('')
     sort.forEach((e,i) => {
       switch (e) {
         case 'y':
@@ -68,7 +68,7 @@ export const custom_yyyymmdd_sort = (region,sort,symbol)=> {
   }
   return returnData  // 自定义顺序
 }
-export const custom_ymd_sort = (region,sort,symbol)=> {
+export const custom_ymd_sort = (region:string,ymdsort?:string,symbol?:string)=> {
   let sym = getSymbol(symbol)
   let date = getWorldTimeZone('en-US',{timeZone:region})
   let dmy = date.split(' ')[1].replace(',','').split('/')
@@ -76,8 +76,8 @@ export const custom_ymd_sort = (region,sort,symbol)=> {
   let m = dmy[0]
   let d = dmy[1]
   let returnData = ''
-  if (sort) {
-    sort = sort.split('')
+  if (ymdsort) {
+    let sort = ymdsort.split('')
     sort.forEach((e,i) => {
       switch (e) {
         case 'y':
@@ -97,41 +97,41 @@ export const custom_ymd_sort = (region,sort,symbol)=> {
   return returnData  // 自定义顺序
 }
 
-export const get_hms = (region)=> {
+export const get_hms = (region:string):string => {
   let date = getWorldTimeZone('en-US',{timeZone:region})
   return date.split(' ')[2]  // 时 分 秒
 }
 
-export const getYear = (region)=>{
+export const getYear = (region:string)=>{
   return Number(get_mmddyyyy(region).split('/')[2])
 }
-export const getMonth = (region)=>{
+export const getMonth = (region:string)=>{
   return Number(get_mmddyyyy(region).split('/')[0]) - 1
 }
-export const getDate = (region)=>{
+export const getDate = (region:string)=>{
   return Number(get_mmddyyyy(region).split('/')[1])
 }
 // 默认24小时制
-export const getHours = (region)=> {
+export const getHours = (region:string)=> {
   let h = Number(get_hms(region).split(':')[0])
   if (h === 24) {
     h = 0
   }
   return Number(h)
 }
-export const getMinutes = (region)=> {
+export const getMinutes = (region:string)=> {
   let m = get_hms(region).split(':')[1]
   return Number(m)
 }
-export const getSeconds = (region)=> {
+export const getSeconds = (region:string)=> {
   let s = get_hms(region).split(':')[2]
   return Number(s)
 }
-export const getDay = (region)=> {
+export const getDay = (region:string)=> {
   DEFAULT_OPTIONS.timeZone = region
   let date = new Date().toLocaleString('en-US',DEFAULT_OPTIONS)
   let day = date.split(' ')[0].replace(',','')
-  let DAY = week.findIndex(e=>{
+  let DAY = week.findIndex((e:string)=>{
     return e == day
   })
   return DAY
@@ -156,7 +156,7 @@ export const EST_getMonth = ()=> {
 export const EST_getDate = ()=> {
   return Number(getESTmmddyyyy().split('/')[1])
 }
-export const EST_getHours = (is0)=> {
+export const EST_getHours = (is0?:number)=> {
   let data = Number(getESThms().split(':')[0])
   if (is0 === 0 && Number(data) === 24) {
     data = 0
@@ -171,7 +171,7 @@ export const EST_getSeconds = ()=> {
 }
 export const EST_getDay = ()=> {
   let usDay = getESTDate().split(' ')[0].replace(',','')
-  let DAY = week.findIndex(e=>{
+  let DAY = week.findIndex((e:string)=>{
     return e == usDay
   })
   return DAY

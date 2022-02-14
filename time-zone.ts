@@ -4,7 +4,7 @@ import {
   EST_getYear,EST_getMonth,EST_getDate,EST_getHours,EST_getMinutes,EST_getSeconds
 } from './operation'
 import { DEFAULT_OPTIONS } from './data'
-let isObject = (type)=>{
+let isObject = (type:any)=>{
   return Object.prototype.toString.call(type) === '[object Object]'
 }
 
@@ -15,7 +15,7 @@ export const getESTDate = ()=> {
   DEFAULT_OPTIONS.timeZone = "America/New_York"
   return new Date().toLocaleString("en-US",DEFAULT_OPTIONS)
 }
-export const getWorldTimeZone = (locales,options)=> {
+export const getWorldTimeZone = (locales:string,options?:DEFAULT_OPTIONS)=> {
   if (!isObject(options)&&options) {
     console.error('getWorldTimeZone() 请传入正确 options 选项');
   }

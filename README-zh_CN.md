@@ -372,3 +372,16 @@ EST_getMinutes()  // 分
 EST_getSeconds()  // 秒
 EST_getDay()  // 星期
 ```
+<br>
+<br>
+
+# 版本更新历史
+
+## v2.1.2
+验证开发、生产环境通过
+
+## v2.1.1
+增加tsconfig.json
+
+## v2.1.0
+将库的 JS 全改为 TS

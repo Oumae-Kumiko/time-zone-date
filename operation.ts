@@ -13,7 +13,7 @@ export const UTC_getSeconds = ()=> new Date().getUTCSeconds()
 
 /** @以下是获取指定时区的指定数据 */
 // 不传则默认代码运行环境时的当前时区
-export const get_mmddyyyy = (region,symbol)=> {
+export const get_mmddyyyy = (region,symbol?:string)=> {
   let sym = getSymbol(symbol)
   let date = getWorldTimeZone('en-GB',{timeZone:region})
   let dmy = date.split(' ')[1].replace(',','').split('/')
@@ -113,8 +113,8 @@ export const getDate = (region)=>{
 }
 // 默认24小时制
 export const getHours = (region)=> {
-  let h = get_hms(region).split(':')[0]
-  if (Number(h) === 24) {
+  let h = Number(get_hms(region).split(':')[0])
+  if (h === 24) {
     h = 0
   }
   return Number(h)
@@ -157,7 +157,7 @@ export const EST_getDate = ()=> {
   return Number(getESTmmddyyyy().split('/')[1])
 }
 export const EST_getHours = (is0)=> {
-  let data = getESThms().split(':')[0]
+  let data = Number(getESThms().split(':')[0])
   if (is0 === 0 && Number(data) === 24) {
     data = 0
   }

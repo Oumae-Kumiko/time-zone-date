@@ -1,6 +1,6 @@
 {
   "name": "@time-zone/date",
-  "version": "2.0.0",
+  "version": "2.1.1",
   "description": "让代码运行在不同国家环境下，都能准确获得指定国家的时间！Let the code run in different national environments, you can accurately obtain the time of the specified country!",
   "main": "index.js",
   "scripts": {
@@ -11,12 +11,15 @@
     "url": "git+https://github.com/Oumae-Kumiko/time-zone-date.git"
   },
   "keywords": [
-    "get time zone date",
-    "custom format",
-    "world time zone",
+    "timezone",
     "date",
+    "moment",
+    "custom format",
     "locale",
-    "operation"
+    "operation",
+    "typescript",
+    "i18n",
+    "time zone"
   ],
   "author": "李嘉辉,645770665@qq.com",
   "license": "ISC",

@@ -16,11 +16,21 @@ npm i @time-zone/date --save
 ```
 <br>
 
-## Usage
+## Example
 * All APIs are introduced in the same way
+* Total 31 APIs
 ```js
-import {isUS_Dst,isUS_Wt} from '@time-zone/date'
-isUS_Wt()
+import {isUS_Wt,isUS_Dst,getWorldTimeZone,getUTCDate} from '@time-zone/date'
+isUS_Wt() // true: It's winter time in the United States GMT-5  ; false: You know...
+getUTCDate() // UTC Current time
+getUTCDate("2022-2-1")
+getUTCDate("2022-2-1 13:10:10")
+getWorldTimeZone()
+getWorldTimeZone("2022-2-1 13:10:10",'en-US')
+getWorldTimeZone("2022-2-1 13:10:10",'en-US',{timeZone:'America/New_York'}) // Specify the time corresponding to a time zone
+getWorldTimeZone(null,'en-US',{timeZone:'America/New_York'}) // Time zone current time
+getWorldTimeZone(new Date(),'en-US',{timeZone:'America/New_York'}) // Time zone current time
+getWorldTimeZone(1643692210000)
 ```
 <br>
 
@@ -75,14 +85,18 @@ isUS_Wt()
 > As mentioned at the beginning of the introduction, this is the main API .  
 > See the end of the document for references to `locales` and `options` parameters.
 - Gets the time in the specified time zone. The first parameter is the returned language type and the second parameter is the target time zone
-* parameter
+* 3 parameters
+* `date`
+  * 用途：`Specify the time to get, and the default current time will not be transferred`
+  * 类型：`?:string | number | Date | null | undefined`
+  * 值：　`Those that match the first parameter of 'new date()' can be used, and 'null' and 'undefined' represent the current time.`
 * `locales`
   * purpose：`Returns the corresponding language type`
-  * type：`string`
+  * 类型：`?:string`
   * value：　`language[-scripts][-region]`
 * `options`
   * purpose：`Adjust the returned time format content. Specifies the time to return to the time zone`
-  * type：`object`
+  * 类型：`?:object`
   * value：　`See options parameter below`
 ```javascript
 import { getWorldTimeZone } from '@time-zone/date'
@@ -97,7 +111,7 @@ let date = getWorldTimeZone('zh-Hans',{timeZone:'Asia/Shanghai'})
 
 ## custom_yyyymmdd_sort()
 Get the month, year and day of the specified time zone, and you can customize the order of month, year and day (supplement 0 when month and day are single digits)
-* 3 parameters
+* 4 parameters
    * `timeZone`：type `string`
    * Date sequence：type `string` 
       * 1、Must be lowercase。
@@ -105,9 +119,10 @@ Get the month, year and day of the specified time zone, and you can customize th
       * 3、The default value for parameters not transmitted isyyyymmdd
       * The order of 3 letters determines the order of return
    * Separator, not passed, default to `/`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { custom_yyyymmdd_sort } from '@time-zone/date'
-let ymd = custom_yyyymmdd_sort('Asia/Shanghai','ymd','-')
+let ymd = custom_yyyymmdd_sort('Asia/Shanghai','ymd','-',new Date())
 let dmy = custom_yyyymmdd_sort('Asia/Shanghai','dmy','/')
 let ydm = custom_yyyymmdd_sort('Asia/Shanghai','ydm','*-@#$$%^^*&(*&)(_+`~')
 let mdy = custom_yyyymmdd_sort('Asia/Shanghai','mdy')
@@ -120,12 +135,13 @@ let ymdy = custom_yyyymmdd_sort('Asia/Shanghai','ymdy')
 
 ## get_mmddyyyy() 　 get_ddmmyyyy() 　 get_yyyymmdd（）
 Get the month, day and year of the specified time zone (supplement 0 if the month and day are single digits)
-* 2 Parameters
+* 3 Parameters
    * `timeZone`：type `string`
    * Separator, not passed, default to `/`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { get_mmddyyyy,get_ddmmyyyy,get_yyyymmdd } from '@time-zone/date'
-let mdy = get_mmddyyyy('Asia/Shanghai')
+let mdy = get_mmddyyyy('Asia/Shanghai','/', new Date())
 // get_ddmmyyyy() , get_yyyymmdd() 
 // No explanation, just look at the name to know the order.
 
@@ -138,15 +154,16 @@ let mdy = get_mmddyyyy('Asia/Shanghai')
 - Other contents follow ` custom_ yyyymmdd_ Sort() ` consistent, no further explanation
 ```javascript
 import { custom_ymd_sort } from '@time-zone/date'
-let ymd = custom_ymd_sort('Asia/Shanghai','ymd','-')
+let ymd = custom_ymd_sort( 'Asia/Shanghai','ymd','-',new Date() )
 ```
 <br>
 
 
 ## get_hms()
 - Gets the hour, minute, and second of the target time zone
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { get_hms } from '@time-zone/date'
 let hms = get_hms('Asia/Shanghai')  // format：08:00:00
@@ -155,8 +172,9 @@ let hms = get_hms('Asia/Shanghai')  // format：08:00:00
 
 ## getYear()
 - Gets the year of the target time zone
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getYear } from '@time-zone/date'
 let year = getYear('Asia/Shanghai')  // Return value number type
@@ -165,8 +183,9 @@ let year = getYear('Asia/Shanghai')  // Return value number type
 
 ## getMonth()
 - Gets the month (0-11) of the target time zone
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getMonth } from '@time-zone/date'
 let month = getMonth('Asia/Shanghai')  // Return value number type
@@ -175,8 +194,9 @@ let month = getMonth('Asia/Shanghai')  // Return value number type
 
 ## getDate()
 - Gets the day of the target time zone
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getDate } from '@time-zone/date'
 let date = getDate('Asia/Shanghai')  // Return value number type
@@ -186,8 +206,9 @@ let date = getDate('Asia/Shanghai')  // Return value number type
 ## getHours()
 - Gets the hour of the target time zone
 - Get the hours of the target time zone separately, and the unified return value is: '0-23', so as to avoid confusion caused by the problem of 1-24 in the United States.
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getHours } from '@time-zone/date'
 let hours = getHours('Asia/Shanghai')  // Return value number type
@@ -196,8 +217,9 @@ let hours = getHours('Asia/Shanghai')  // Return value number type
 
 ## getMinutes()
 - Gets the minutes of the target time zone
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getMinutes } from '@time-zone/date'
 let minutes = getMinutes('Asia/Shanghai')  // Return value number type
@@ -206,8 +228,9 @@ let minutes = getMinutes('Asia/Shanghai')  // Return value number type
 
 ## getSeconds()
 - Gets the second of the target time zone
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getSeconds } from '@time-zone/date'
 let sec = getSeconds('Asia/Shanghai')  // Return value number type
@@ -217,18 +240,21 @@ let sec = getSeconds('Asia/Shanghai')  // Return value number type
 ## getDay()
 - Gets the week in the target time zone
 - The return value is' 0-6 ', 0 is Sunday, 1 is Monday, followed by order
-* parameter
+* 2 parameters
    * `timeZone`：type `string`
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getDay } from '@time-zone/date'
 let day = getDay('Asia/Shanghai')  // Return value number type
 ```
 <br>
+<br>
 
 
 ## getESTDate()  
 * Get the time of EST time zone. The returned language type is en US
-* No parameters
+* parameter
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getESTDate } from '@time-zone/date'
 let date = getESTDate()
@@ -238,7 +264,8 @@ let date = getESTDate()
 
 ## getUTCDate()  
 * Get UTC time zone
-* No parameters
+* parameter
+   * Specified time: the default current time is not transmitted;
 ```javascript
 import { getUTCDate } from '@time-zone/date'
 let date = getUTCDate()
@@ -340,6 +367,7 @@ let options = {
 ```
 
 ## Reference value of：`options.timeZone` 
+- For other values, please refer to：https://www.iana.org/time-zones
 ```javascript
 timeZone:'UTC' // UTC time
 timeZone:'Europe/Berlin' // GMT+1; German time zone

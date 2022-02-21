@@ -1,3 +1,4 @@
+type DatePara = string | number | Date | null | undefined
 
 import {
   UTC_getYear,UTC_getMonth,UTC_getDate,UTC_getHours,UTC_getMinutes,UTC_getSeconds,
@@ -7,15 +8,16 @@ import { DEFAULT_OPTIONS } from './data'
 let isObject = (type:any)=>{
   return Object.prototype.toString.call(type) === '[object Object]'
 }
-
-export const getUTCDate = ()=> {
-  return new Date().toUTCString()
+export const getUTCDate = (datePara?:DatePara)=> {
+  datePara = datePara ? datePara:new Date();
+  return new Date(datePara).toUTCString()
 }
-export const getESTDate = ()=> {
-  DEFAULT_OPTIONS.timeZone = "America/New_York"
-  return new Date().toLocaleString("en-US",DEFAULT_OPTIONS)
+export const getESTDate = (datePara?:DatePara)=> {
+  datePara = datePara ? datePara:new Date();
+  DEFAULT_OPTIONS.timeZone = "America/New_York";
+  return new Date(datePara).toLocaleString("en-US",DEFAULT_OPTIONS)
 }
-export const getWorldTimeZone = (locales:string,options?:DEFAULT_OPTIONS)=> {
+export const getWorldTimeZone = (datePara?:DatePara,locales?:string,options?:DEFAULT_OPTIONS)=> {
   if (!isObject(options)&&options) {
     console.error('getWorldTimeZone() 请传入正确 options 选项');
   }
@@ -23,7 +25,8 @@ export const getWorldTimeZone = (locales:string,options?:DEFAULT_OPTIONS)=> {
     ...DEFAULT_OPTIONS,
     ...options
   }
-  return new Date().toLocaleString(locales,data)
+  datePara = datePara ? datePara:new Date();
+  return new Date(datePara).toLocaleString(locales,data)
 }
 
 export const isUS_Dst = ()=> {

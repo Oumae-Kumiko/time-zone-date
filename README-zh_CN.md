@@ -22,11 +22,21 @@ npm i @time-zone/date --save
 ```
 <br>
 
-## 用法
+## 例子
 * 所有 API 引入方式都一样
+* 总共 31 个API
 ```js
-import {isUS_Dst,isUS_Wt} from '@time-zone/date'
-isUS_Wt()
+import {isUS_Wt,isUS_Dst,getWorldTimeZone,getUTCDate} from '@time-zone/date'
+isUS_Wt() // true: 美国现在是冬令时 GMT-5  ; false: 现在是夏令时
+getUTCDate() // UTC 当前时间
+getUTCDate("2022-2-1")
+getUTCDate("2022-2-1 13:10:10")
+getWorldTimeZone()
+getWorldTimeZone("2022-2-1 13:10:10",'en-US')
+getWorldTimeZone("2022-2-1 13:10:10",'en-US',{timeZone:'America/New_York'}) // 指定某个时区对应的时间
+getWorldTimeZone(null,'en-US',{timeZone:'America/New_York'}) // 时区当前时间
+getWorldTimeZone(new Date(),'en-US',{timeZone:'America/New_York'}) // 时区当前时间
+getWorldTimeZone(1643692210000)
 ```
 <br>
 
@@ -80,14 +90,18 @@ isUS_Wt()
 ## getWorldTimeZone()  
 > 如介绍的开头内容，这是主要 API ，`locales` 和 `options` 参数参考见文档末尾
 - 获取指定时区的时间，第一个参数为返回的语言类型，第二个参数为目标时区
-* 参数
+* 参数3个：
+* `date`
+  * 用途：`指定获取的时间，不传默认当前时间`
+  * 类型：`?:string | number | Date | null | undefined`
+  * 值：　`符合new Date()第一个参数的都可以使用，null 和 undefined表示当前时间。`
 * `locales`
   * 用途：`返回对应的语言类型`
-  * 类型：`string`
+  * 类型：`?:string`
   * 值：　`language[-scripts][-region]`
 * `options`
   * 用途：`调整返回的时间格式内容，指定返回时区的时间`
-  * 类型：`object`
+  * 类型：`?:object`
   * 值：　`详情参数查看下方 options 内容`
 ```javascript
 import { getWorldTimeZone } from '@time-zone/date'
@@ -102,15 +116,16 @@ let date = getWorldTimeZone('zh-Hans',{timeZone:'Asia/Shanghai'})
 
 ## custom_yyyymmdd_sort()
 获取指定时区的年月日，并且可自定义年月日的顺序（月日为个位数的情况下补充0）
-* 参数3个
+* 参数4个
    * `timeZone`：类型 `string`
    * 年月日顺序：类型 `string` 
       * 1、必须为小写。2、字母为`y`、`m`、`d`。3、不传默认yyyymmdd
       * 3个字母的顺序决定返回的顺序
    * 分隔符，不传默认为`/`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { custom_yyyymmdd_sort } from '@time-zone/date'
-let ymd = custom_yyyymmdd_sort('Asia/Shanghai','ymd','-')
+let ymd = custom_yyyymmdd_sort('Asia/Shanghai','ymd','-', new Date())
 let dmy = custom_yyyymmdd_sort('Asia/Shanghai','dmy','/')
 let ydm = custom_yyyymmdd_sort('Asia/Shanghai','ydm','*-@#$$%^^*&(*&)(_+`~')
 let mdy = custom_yyyymmdd_sort('Asia/Shanghai','mdy')
@@ -121,14 +136,15 @@ let ymdy = custom_yyyymmdd_sort('Asia/Shanghai','ymdy')
 <br>
 
 
-## get_mmddyyyy() 　 get_ddmmyyyy() 　 get_yyyymmdd（）
+## get_mmddyyyy() 　 get_ddmmyyyy() 　 get_yyyymmdd()
 获取指定时区的月日年（月日为个位数的情况下补充0）
-* 参数2个
-   * `timeZone`：类型 `string`
-   * 分隔符，不传默认为`/`
+* 参数3个
+   * `timeZone`：类型 `string`;
+   * 分隔符：不传默认为`/`;
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { get_mmddyyyy,get_ddmmyyyy,get_yyyymmdd } from '@time-zone/date'
-let mdy = get_mmddyyyy('Asia/Shanghai')
+let mdy = get_mmddyyyy('Asia/Shanghai','/', new Date())
 // get_ddmmyyyy 和 get_yyyymmdd 不解释了，看名字就知道顺序了。
 
 ```
@@ -140,15 +156,16 @@ let mdy = get_mmddyyyy('Asia/Shanghai')
 - 其他内容跟 `custom_yyyymmdd_sort()` 一致，不再解释
 ```javascript
 import { custom_ymd_sort } from '@time-zone/date'
-let ymd = custom_ymd_sort('Asia/Shanghai','ymd','-')
+let ymd = custom_ymd_sort( 'Asia/Shanghai','ymd','-',new Date() )
 ```
 <br>
 
 
 ## get_hms()
 - 获取目标时区的时分秒
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { get_hms } from '@time-zone/date'
 let hms = get_hms('Asia/Shanghai')  // 格式：08:00:00
@@ -157,8 +174,9 @@ let hms = get_hms('Asia/Shanghai')  // 格式：08:00:00
 
 ## getYear()
 - 获取目标时区的年
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getYear } from '@time-zone/date'
 let year = getYear('Asia/Shanghai')  // 返回值 number 类型
@@ -167,8 +185,9 @@ let year = getYear('Asia/Shanghai')  // 返回值 number 类型
 
 ## getMonth()
 - 获取目标时区的月（0-11）
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getMonth } from '@time-zone/date'
 let month = getMonth('Asia/Shanghai')  // 返回值 number 类型
@@ -177,8 +196,9 @@ let month = getMonth('Asia/Shanghai')  // 返回值 number 类型
 
 ## getDate()
 - 获取目标时区的日
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getDate } from '@time-zone/date'
 let date = getDate('Asia/Shanghai')  // 返回值 number 类型
@@ -188,8 +208,9 @@ let date = getDate('Asia/Shanghai')  // 返回值 number 类型
 ## getHours()
 - 获取目标时区的小时
 - 单独获取目标时区的小时，统一返回值为：`0-23`，避免因美国1-24的问题造成混乱。
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getHours } from '@time-zone/date'
 let hours = getHours('Asia/Shanghai')  // 返回值 number 类型
@@ -198,8 +219,9 @@ let hours = getHours('Asia/Shanghai')  // 返回值 number 类型
 
 ## getMinutes()
 - 获取目标时区的分钟
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getMinutes } from '@time-zone/date'
 let minutes = getMinutes('Asia/Shanghai')  // 返回值 number 类型
@@ -208,8 +230,9 @@ let minutes = getMinutes('Asia/Shanghai')  // 返回值 number 类型
 
 ## getSeconds()
 - 获取目标时区的秒
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getSeconds } from '@time-zone/date'
 let sec = getSeconds('Asia/Shanghai')  // 返回值 number 类型
@@ -219,18 +242,21 @@ let sec = getSeconds('Asia/Shanghai')  // 返回值 number 类型
 ## getDay()
 - 获取目标时区的星期
 - 返回值为 `0-6` ，0为星期天，1为星期一，后面依次排序
-* 参数
+* 参数2个：
    * `timeZone`：类型 `string`
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getDay } from '@time-zone/date'
 let day = getDay('Asia/Shanghai')  // 返回值 number 类型
 ```
 <br>
+<br>
 
 
 ## getESTDate()  
 获取EST时区的时间，返回的语言类型en-US
-* 无参数
+* 参数1个：
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getESTDate } from '@time-zone/date'
 let date = getESTDate()
@@ -240,7 +266,8 @@ let date = getESTDate()
 
 ## getUTCDate()  
 获取UTC时区时间
-* 无参数
+* 参数1个：
+   * 指定时间：不传默认当前时间;
 ```javascript
 import { getUTCDate } from '@time-zone/date'
 let date = getUTCDate()
@@ -338,8 +365,10 @@ let options = {
   timeZone:"", // 指定城市的时区
 }
 ```
+---
 
-## `options.timeZone` 的参考值：
+# `options.timeZone` 的参考值：
+- 其他值请参考：https://www.iana.org/time-zones
 ```javascript
 timeZone:'UTC' // UTC 时间
 timeZone:'Europe/Berlin' // GMT+1 德国时区

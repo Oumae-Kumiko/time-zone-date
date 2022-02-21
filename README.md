@@ -405,11 +405,14 @@ EST_getDay()
 
 # 版本更新历史
 
+## v2.2.0
+The corresponding time can be specified for all API additions
+
 ## v2.1.2
-验证开发、生产环境通过
+Verification of development and production environment
 
 ## v2.1.1
-增加tsconfig.json
+add tsconfig.json
 
 ## v2.1.0
-将库的 JS 全改为 TS
+Change the JS of the library to ts

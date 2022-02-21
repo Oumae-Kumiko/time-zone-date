@@ -1,5 +1,5 @@
-# World time zone tool library
-# 世界各时区工具库
+# Get the tool library of time zones and times in the world
+# 获取世界各时区、时间的工具库
 
 ## preface
 * Let the code run in different national environments, you can accurately obtain the time of the specified country!
@@ -403,7 +403,7 @@ EST_getDay()
 <br>
 <br>
 
-# 版本更新历史
+# Version update history
 
 ## v2.2.0
 The corresponding time can be specified for all API additions

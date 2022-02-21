@@ -1,5 +1,5 @@
-# 世界各时区工具库
-# World time zone tool library
+# 获取世界各时区、时间的工具库
+# Get the tool library of time zones and times in the world
 
 
 [![NPM version](https://img.shields.io/npm/v/@time-zone/date.svg?style=flat-square)](https://www.npmjs.com/package/@time-zone/date)

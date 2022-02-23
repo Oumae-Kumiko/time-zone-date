@@ -86,16 +86,16 @@ getWorldTimeZone(1643692210000)
 - Gets the time in the specified time zone. The first parameter is the returned language type and the second parameter is the target time zone
 * 3 parameters
 * `date`
-  * 用途：`Specify the time to get, and the default current time will not be transferred`
-  * 类型：`?:string | number | Date | null | undefined`
-  * 值：　`Those that match the first parameter of 'new date()' can be used, and 'null' and 'undefined' represent the current time.`
+  * purpose：`Specify the time to get, and the default current time will not be transferred`
+  * type：`?:string | number | Date | null | undefined`
+  * value：　`Those that match the first parameter of 'new date()' can be used, and 'null' and 'undefined' represent the current time.`
 * `locales`
   * purpose：`Returns the corresponding language type`
-  * 类型：`?:string`
+  * type：`?:string`
   * value：　`language[-scripts][-region]`
 * `options`
   * purpose：`Adjust the returned time format content. Specifies the time to return to the time zone`
-  * 类型：`?:object`
+  * type：`?:object`
   * value：　`See options parameter below`
 ```javascript
 import { getWorldTimeZone } from '@time-zone/date'
@@ -296,6 +296,26 @@ let booleanDate = isUS_Wt()
 <br>
 
 
+# Other 
+## Corresponding value of EST time
+* parameter
+   * Specified time: the default current time is not transmitted; Parameter type is `?:string | number | Date | null | undefined`
+```javascript
+import { getESTmmddyyyy, ...... } from '@time-zone/date'
+getESTmmddyyyy()
+getESThms()
+EST_getYear()
+EST_getMonth()
+EST_getDate()
+EST_getHours(0)  // U.S. hours. If 0 is passed, it means that the starting point of the new day is 0, otherwise it is 24
+EST_getMinutes()
+EST_getSeconds()
+EST_getDay()
+```
+<br>
+<br>
+
+
 # `locales` parameter  
 * type：`string`
 * language[-scripts][-region]  
@@ -383,26 +403,16 @@ timeZone:'America/Chicago' // CST; Central time zone
 ```
 
 <br>
+<br>
 
-# Other 
-## Corresponding value of EST time
-* You don't need to pass parameters
-```javascript
-import { getESTmmddyyyy, ...... } from '@time-zone/date'
-getESTmmddyyyy()
-getESThms()
-EST_getYear()
-EST_getMonth()
-EST_getDate()
-EST_getHours(0)  // U.S. hours. If 0 is passed, it means that the starting point of the new day is 0, otherwise it is 24
-EST_getMinutes()
-EST_getSeconds()
-EST_getDay()
-```
-<br>
-<br>
 
 # Version update history
+
+## v2.2.2
+Update document parameter description
+
+## v2.2.1
+Update document example reference
 
 ## v2.2.0
 The corresponding time can be specified for all API additions

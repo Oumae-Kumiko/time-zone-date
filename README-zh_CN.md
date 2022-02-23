@@ -296,6 +296,26 @@ let booleanDate = isUS_Wt()
 <br>
 
 
+# 其他 
+## EST时间的对应值
+* 参数1个：
+   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+```javascript
+import { getESTmmddyyyy, ...... } from '@time-zone/date'
+getESTmmddyyyy()  // 月日年
+getESThms()  // 时分秒
+EST_getYear()  // 年
+EST_getMonth()  // 月
+EST_getDate()  // 日
+EST_getHours(0)  // 美国小时，如果传0表示新的一天起点为0，否则为24
+EST_getMinutes()  // 分
+EST_getSeconds()  // 秒
+EST_getDay()  // 星期
+```
+<br>
+<br>
+
+
 # `locales` 参数  
 * 类型：`string`
 * language[-scripts][-region]  
@@ -384,26 +404,17 @@ timeZone:'America/Chicago' // CST 美国中部时区
 ```
 
 <br>
+<br>
+<br>
 
-# 其他 
-## EST时间的对应值
-* 都不需要传参数
-```javascript
-import { getESTmmddyyyy, ...... } from '@time-zone/date'
-getESTmmddyyyy()  // 月日年
-getESThms()  // 时分秒
-EST_getYear()  // 年
-EST_getMonth()  // 月
-EST_getDate()  // 日
-EST_getHours(0)  // 美国小时，如果传0表示新的一天起点为0，否则为24
-EST_getMinutes()  // 分
-EST_getSeconds()  // 秒
-EST_getDay()  // 星期
-```
-<br>
-<br>
 
 # 版本更新历史
+
+## v2.2.2
+更新文档参数说明
+
+## v2.2.1
+更新文档例子参考
 
 ## v2.2.0
 所有API增加可指定对应时间

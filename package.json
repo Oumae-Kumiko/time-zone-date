@@ -1,7 +1,7 @@
 {
   "name": "@time-zone/date",
-  "version": "2.2.0",
-  "description": "让代码运行在不同国家环境下，都能准确获得指定国家的时间！Let the code run in different national environments, you can accurately obtain the time of the specified country!",
+  "version": "2.2.2",
+  "description": "让代码运行在不同时区（国家）环境下，都能准确获得指定时区（国家）的时间！Let the code run in different time zones (countries) environment, can accurately obtain the time of the specified time zone (country)!",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

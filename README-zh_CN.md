@@ -88,10 +88,10 @@ getWorldTimeZone(1643692210000)
 
 ## getWorldTimeZone()  
 > 如介绍的开头内容，这是主要 API ，`locales` 和 `options` 参数参考见文档末尾
-- 获取指定时区的时间，第一个参数为返回的语言类型，第二个参数为目标时区
+- 获取指定时区的时间
 * 参数3个：
 * `date`
-  * 用途：`指定获取的时间，不传默认当前时间`
+  * 用途：`时间参数；以当前运行的系统环境为基准，获取对应时区的时间`
   * 类型：`?:string | number | Date | null | undefined`
   * 值：　`符合new Date()第一个参数的都可以使用，null 和 undefined表示当前时间。`
 * `locales`
@@ -121,7 +121,7 @@ let date = getWorldTimeZone(new Date(),'en-US',{timeZone:'America/New_York'})
       * 1、必须为小写。2、字母为`y`、`m`、`d`。3、不传默认yyyymmdd
       * 3个字母的顺序决定返回的顺序
    * 分隔符，不传默认为`/`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { custom_yyyymmdd_sort } from '@time-zone/date'
 let ymd = custom_yyyymmdd_sort('Asia/Shanghai','ymd','-', new Date())
@@ -140,7 +140,7 @@ let ymdy = custom_yyyymmdd_sort('Asia/Shanghai','ymdy')
 * 参数3个
    * `timeZone`：类型 `string`;
    * 分隔符：不传默认为`/`;
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { get_mmddyyyy,get_ddmmyyyy,get_yyyymmdd } from '@time-zone/date'
 let mdy = get_mmddyyyy('Asia/Shanghai','/', new Date())
@@ -164,7 +164,7 @@ let ymd = custom_ymd_sort( 'Asia/Shanghai','ymd','-',new Date() )
 - 获取目标时区的时分秒
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { get_hms } from '@time-zone/date'
 let hms = get_hms('Asia/Shanghai')  // 格式：08:00:00
@@ -175,7 +175,7 @@ let hms = get_hms('Asia/Shanghai')  // 格式：08:00:00
 - 获取目标时区的年
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getYear } from '@time-zone/date'
 let year = getYear('Asia/Shanghai')  // 返回值 number 类型
@@ -186,7 +186,7 @@ let year = getYear('Asia/Shanghai')  // 返回值 number 类型
 - 获取目标时区的月（0-11）
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getMonth } from '@time-zone/date'
 let month = getMonth('Asia/Shanghai')  // 返回值 number 类型
@@ -197,7 +197,7 @@ let month = getMonth('Asia/Shanghai')  // 返回值 number 类型
 - 获取目标时区的日
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getDate } from '@time-zone/date'
 let date = getDate('Asia/Shanghai')  // 返回值 number 类型
@@ -209,7 +209,7 @@ let date = getDate('Asia/Shanghai')  // 返回值 number 类型
 - 单独获取目标时区的小时，统一返回值为：`0-23`，避免因美国1-24的问题造成混乱。
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getHours } from '@time-zone/date'
 let hours = getHours('Asia/Shanghai')  // 返回值 number 类型
@@ -220,7 +220,7 @@ let hours = getHours('Asia/Shanghai')  // 返回值 number 类型
 - 获取目标时区的分钟
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getMinutes } from '@time-zone/date'
 let minutes = getMinutes('Asia/Shanghai')  // 返回值 number 类型
@@ -231,7 +231,7 @@ let minutes = getMinutes('Asia/Shanghai')  // 返回值 number 类型
 - 获取目标时区的秒
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getSeconds } from '@time-zone/date'
 let sec = getSeconds('Asia/Shanghai')  // 返回值 number 类型
@@ -243,7 +243,7 @@ let sec = getSeconds('Asia/Shanghai')  // 返回值 number 类型
 - 返回值为 `0-6` ，0为星期天，1为星期一，后面依次排序
 * 参数2个：
    * `timeZone`：类型 `string`
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getDay } from '@time-zone/date'
 let day = getDay('Asia/Shanghai')  // 返回值 number 类型
@@ -255,7 +255,7 @@ let day = getDay('Asia/Shanghai')  // 返回值 number 类型
 ## getESTDate()  
 获取EST时区的时间，返回的语言类型en-US
 * 参数1个：
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getESTDate } from '@time-zone/date'
 let date = getESTDate()
@@ -266,7 +266,7 @@ let date = getESTDate()
 ## getUTCDate()  
 获取UTC时区时间
 * 参数1个：
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getUTCDate } from '@time-zone/date'
 let date = getUTCDate()
@@ -299,7 +299,7 @@ let booleanDate = isUS_Wt()
 # 其他 
 ## EST时间的对应值
 * 参数1个：
-   * 指定时间：不传默认当前时间; 参数类型为 `?:string | number | Date | null | undefined`
+   * 时间参数；以当前运行的系统环境为基准，获取对应时区的时间; 参数类型为 `?:string | number | Date | null | undefined`
 ```javascript
 import { getESTmmddyyyy, ...... } from '@time-zone/date'
 getESTmmddyyyy()  // 月日年
